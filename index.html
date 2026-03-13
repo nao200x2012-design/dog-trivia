@@ -2,34 +2,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>犬うんちく</title>
+<title>今日の犬うんちく</title>
+
+<style>
+body{
+font-family:sans-serif;
+text-align:center;
+margin:40px;
+}
+
+h1{
+font-size:28px;
+}
+
+.title{
+font-size:22px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.text{
+max-width:700px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+margin-top:15px;
+}
+
+button{
+font-size:18px;
+padding:10px 20px;
+margin-top:30px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center;font-family:sans-serif;margin-top:100px;">
+<body>
 
-<h1>🐶今日の犬うんちく</h1>
+<h1>🐶 今日の犬うんちく</h1>
 
-<p id="dog"></p>
+<div class="title" id="title"></div>
+<div class="text" id="text"></div>
 
-<button onclick="next()">もう一回</button>
+<button onclick="next()">別のうんちく</button>
 
 <script>
 
-let dog = [
+let trivia = [
 
-"犬の嗅覚は人間の1万倍",
-"犬は夢を見る",
-"犬の鼻紋は指紋のように個体差がある",
-"犬は250語以上理解できる",
-"犬は人の感情を読む"
+{
+title:"犬の嗅覚は人の1万倍",
+text:"犬は非常に優れた嗅覚を持つ動物です。人間と比べるとおよそ1万倍以上の嗅覚能力があるとされ、微量な匂いでも識別することができます。この能力は警察犬や災害救助犬として活躍する理由の一つで、行方不明者の捜索や爆発物探知などにも利用されています。犬の鼻には匂いを分析する細胞が非常に多く存在しており、匂いを立体的に感じ取ることができると言われています。"
+},
+
+{
+title:"犬は夢を見る",
+text:"犬は睡眠中に夢を見ることが科学的に確認されています。睡眠には人間と同じようにレム睡眠という段階があり、このとき脳が活発に動いて夢を見ます。犬が寝ているときに足を動かしたり、鼻をピクピクさせたり、小さく鳴いたりするのは夢の中で何かを体験している可能性があります。多くの場合、日中の散歩や遊びの記憶を夢として再現していると考えられています。"
+},
+
+{
+title:"犬の鼻紋は指紋のように違う",
+text:"犬の鼻の表面には細かい溝の模様があります。これを鼻紋と呼びます。この模様は人間の指紋と同じように一匹ごとに異なっており、同じ模様の犬は存在しません。そのため一部の国では犬の身元確認のために鼻紋を記録することもあります。マイクロチップが普及する以前は、この鼻紋が犬の個体識別として利用されることもありました。"
+}
 
 ];
 
 function next(){
 
-let r = Math.floor(Math.random() * dog.length);
+let r = Math.floor(Math.random() * trivia.length);
 
-document.getElementById("dog").innerText = dog[r];
+document.getElementById("title").innerText = trivia[r].title;
+document.getElementById("text").innerText = trivia[r].text;
 
 }
 
