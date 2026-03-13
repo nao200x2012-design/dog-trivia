@@ -11,12 +11,8 @@ text-align:center;
 margin:40px;
 }
 
-h1{
-font-size:28px;
-}
-
 .title{
-font-size:22px;
+font-size:24px;
 font-weight:bold;
 margin-top:20px;
 }
@@ -45,49 +41,24 @@ margin-top:30px;
 <div class="title" id="title"></div>
 <div class="text" id="text"></div>
 
-<button onclick="next()">別のうんちく</button>
+<button onclick="loadTrivia()">別のうんちく</button>
 
 <script>
 
-let trivia = [
+async function loadTrivia(){
 
-{
-title:"犬の嗅覚は人の1万倍",
-text:"犬は非常に優れた嗅覚を持つ動物です。人間と比べると約1万倍以上の嗅覚能力があると言われています。犬の鼻には匂いを感知する細胞が非常に多く存在しており、わずかな匂いの違いでも識別することができます。そのため警察犬や災害救助犬として活躍することができ、人間には分からない匂いの痕跡を追跡することができます。"
-},
+let res = await fetch("ここにシートURL");
 
-{
-title:"犬は夢を見る",
-text:"犬も人間と同じように夢を見ることが科学的に確認されています。犬が眠っているときに足を動かしたり、小さく鳴いたりすることがありますが、これは夢を見ている可能性が高い行動です。日中の散歩や遊びなどの記憶が夢の中で再現されていると考えられています。"
-},
+let data = await res.json();
 
-{
-title:"犬の鼻紋は指紋のように違う",
-text:"犬の鼻の表面には細かい模様があります。この模様は鼻紋と呼ばれ、人間の指紋のように一匹ごとに違います。同じ模様の犬は存在しないため、犬の個体識別に利用されることもあります。現在はマイクロチップが主流ですが、以前は鼻紋を使った登録方法もありました。"
-},
+let r = Math.floor(Math.random()*data.length);
 
-{
-title:"犬は人の感情を読む",
-text:"犬は人間の表情や声のトーンを読み取る能力があります。研究では、犬は人が怒っているのか喜んでいるのかを顔の表情から判断できることが分かっています。そのため飼い主が悲しんでいると寄り添うような行動をすることがあります。"
-},
-
-{
-title:"犬の聴覚は人の4倍",
-text:"犬は非常に優れた聴覚を持っています。人間よりも高い周波数の音を聞くことができ、遠くの小さな音にも敏感です。そのため犬笛のように人間には聞こえない音でも犬には聞こえます。"
-}
-
-];
-
-function next(){
-
-let r = Math.floor(Math.random() * trivia.length);
-
-document.getElementById("title").innerText = trivia[r].title;
-document.getElementById("text").innerText = trivia[r].text;
+document.getElementById("title").innerText = data[r].title;
+document.getElementById("text").innerText = data[r].text;
 
 }
 
-next();
+loadTrivia();
 
 </script>
 
