@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>犬うんちく</title>
+</head>
+
+<body style="text-align:center;font-family:sans-serif;margin-top:100px;">
+
+<h1>🐶今日の犬うんちく</h1>
+
+<p id="dog"></p>
+
+<button onclick="next()">もう一回</button>
+
+<script>
+
+let dog = [
+
+"犬の嗅覚は人間の1万倍",
+"犬は夢を見る",
+"犬の鼻紋は指紋のように個体差がある",
+"犬は250語以上理解できる",
+"犬は人の感情を読む"
+
+];
+
+function next(){
+
+let r = Math.floor(Math.random() * dog.length);
+
+document.getElementById("dog").innerText = dog[r];
+
+}
+
+next();
+
+</script>
+
+</body>
+</html>
