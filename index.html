@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>猫のうんちく</title>
+<title>犬のうんちく</title>
 
 <style>
+
 body{
 margin:0;
 padding:20px;
@@ -54,7 +55,7 @@ padding:18px 30px;
 margin-top:25px;
 border:none;
 border-radius:15px;
-background:#ff9800;
+background:#4CAF50;
 color:white;
 cursor:pointer;
 }
@@ -68,6 +69,7 @@ margin-left:10px;
 font-size:28px;
 margin-top:40px;
 }
+
 </style>
 </head>
 
@@ -75,13 +77,13 @@ margin-top:40px;
 
 <div class="card">
 
-<h1>🐱 猫のうんちく</h1>
+<h1>🐶 犬のうんちく</h1>
 
 <div id="loading" class="loading">
 読み込み中...
 </div>
 
-<img id="catImage" src="">
+<img id="dogImage" src="">
 
 <div class="title" id="title"></div>
 
@@ -91,14 +93,16 @@ margin-top:40px;
 別のうんちく
 </button>
 
-<button class="audioBtn" onclick="playMeow()">
-🔊 ニャー
+<button class="audioBtn" onclick="playDogSound()">
+🔊 ワン
 </button>
 
-<audio id="meowAudio" preload="auto">
-<source src="https://assets.mixkit.co/active_storage/sfx/93/93-preview.mp3" type="audio/mpeg">
+<!-- 本物の犬の鳴き声 -->
+<audio id="dogAudio" preload="auto">
+<source src="dog.mp3" type="audio/mpeg">
 </audio>
 
+<!-- 癒しBGM -->
 <audio id="bgm" loop preload="auto">
 <source src="bgm.mp3" type="audio/mpeg">
 </audio>
@@ -106,15 +110,21 @@ margin-top:40px;
 </div>
 
 <script>
-const csvUrl =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSHhRfRbwkndjpL4OKibjXyWf1wa5wDnv8_iDlY8zC5l3S6rBwdc_sWB3mHh7OOkvU3U7G1mv7TqM_a/pub?gid=0&single=true&output=csv";
 
-const catImages = [
-"https://cataas.com/cat?1",
-"https://cataas.com/cat?2",
-"https://cataas.com/cat?3",
-"https://cataas.com/cat?4",
-"https://cataas.com/cat?5"
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vQlZqF7nIBIcNiALO9tGg1cBL6eckZSZoyeiuM3RuQ4TWq5CDm5EdY9LbLgYJNBdK8GEVToMUS-rUFl/pub?gid=586931856&single=true&output=csv";
+
+const dogImages = [
+
+"https://placedog.net/500/500?id=1",
+"https://placedog.net/500/500?id=2",
+"https://placedog.net/500/500?id=3",
+"https://placedog.net/500/500?id=4",
+"https://placedog.net/500/500?id=5",
+"https://placedog.net/500/500?id=6",
+"https://placedog.net/500/500?id=7",
+"https://placedog.net/500/500?id=8"
+
 ];
 
 async function loadTrivia(){
@@ -122,16 +132,23 @@ async function loadTrivia(){
 document.getElementById("loading").style.display="block";
 
 let res = await fetch(csvUrl);
+
 let csv = await res.text();
 
 let rows = csv.trim().split("\n").slice(1);
 
 let data = rows.map(row => {
+
 let cols = row.split(",");
+
 return {
+
 title: cols[0],
+
 text: cols.slice(1).join(",")
+
 };
+
 });
 
 let random = Math.floor(Math.random()*data.length);
@@ -143,29 +160,41 @@ document.getElementById("text").innerText =
 data[random].text;
 
 let imgRandom =
-Math.floor(Math.random()*catImages.length);
+Math.floor(Math.random()*dogImages.length);
 
-document.getElementById("catImage").src =
-catImages[imgRandom];
+document.getElementById("dogImage").src =
+dogImages[imgRandom];
 
 document.getElementById("loading").style.display="none";
 
 }
 
-function playMeow(){
+function playDogSound(){
 
-let meow = document.getElementById("meowAudio");
+let dog = document.getElementById("dogAudio");
+
 let bgm = document.getElementById("bgm");
 
-meow.currentTime = 0;
-meow.play();
+dog.currentTime = 0;
 
-bgm.volume = 0.3;
+dog.play();
+
+bgm.volume = 0.05;
+
+if(bgm.paused){
+
 bgm.play();
+
+}else{
+
+bgm.pause();
+
+}
 
 }
 
 loadTrivia();
+
 </script>
 
 </body>
