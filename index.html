@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>犬のうんちく</title>
+<title>猫のうんちく</title>
 
 <style>
 body{
@@ -54,7 +54,7 @@ padding:18px 30px;
 margin-top:25px;
 border:none;
 border-radius:15px;
-background:#4CAF50;
+background:#ff9800;
 color:white;
 cursor:pointer;
 }
@@ -75,27 +75,28 @@ margin-top:40px;
 
 <div class="card">
 
-<h1>🐶 犬のうんちく</h1>
+<h1>🐱 猫のうんちく</h1>
 
 <div id="loading" class="loading">
 読み込み中...
 </div>
 
-<img id="dogImage" src="">
+<img id="catImage" src="">
 
 <div class="title" id="title"></div>
+
 <div class="text" id="text"></div>
 
 <button onclick="loadTrivia()">
 別のうんちく
 </button>
 
-<button class="audioBtn" onclick="playDogSound()">
-🔊 ワン
+<button class="audioBtn" onclick="playMeow()">
+🔊 ニャー
 </button>
 
-<audio id="dogAudio" preload="auto">
-<source src="https://assets.mixkit.co/active_storage/sfx/85/85-preview.mp3" type="audio/mpeg">
+<audio id="meowAudio" preload="auto">
+<source src="https://assets.mixkit.co/active_storage/sfx/93/93-preview.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="bgm" loop preload="auto">
@@ -105,19 +106,15 @@ margin-top:40px;
 </div>
 
 <script>
-
 const csvUrl =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vQlZqF7nIBIcNiALO9tGg1cBL6eckZSZoyeiuM3RuQ4TWq5CDm5EdY9LbLgYJNBdK8GEVToMUS-rUFl/pub?gid=586931856&single=true&output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSHhRfRbwkndjpL4OKibjXyWf1wa5wDnv8_iDlY8zC5l3S6rBwdc_sWB3mHh7OOkvU3U7G1mv7TqM_a/pub?gid=0&single=true&output=csv";
 
-const dogImages = [
-"https://placedog.net/500/500?id=1",
-"https://placedog.net/500/500?id=2",
-"https://placedog.net/500/500?id=3",
-"https://placedog.net/500/500?id=4",
-"https://placedog.net/500/500?id=5",
-"https://placedog.net/500/500?id=6",
-"https://placedog.net/500/500?id=7",
-"https://placedog.net/500/500?id=8"
+const catImages = [
+"https://cataas.com/cat?1",
+"https://cataas.com/cat?2",
+"https://cataas.com/cat?3",
+"https://cataas.com/cat?4",
+"https://cataas.com/cat?5"
 ];
 
 async function loadTrivia(){
@@ -146,35 +143,29 @@ document.getElementById("text").innerText =
 data[random].text;
 
 let imgRandom =
-Math.floor(Math.random()*dogImages.length);
+Math.floor(Math.random()*catImages.length);
 
-document.getElementById("dogImage").src =
-dogImages[imgRandom];
+document.getElementById("catImage").src =
+catImages[imgRandom];
 
 document.getElementById("loading").style.display="none";
 
 }
 
-function playDogSound(){
+function playMeow(){
 
-let dog = document.getElementById("dogAudio");
+let meow = document.getElementById("meowAudio");
 let bgm = document.getElementById("bgm");
 
-dog.currentTime = 0;
-dog.play();
+meow.currentTime = 0;
+meow.play();
 
-bgm.volume = 0.05;
-
-if(bgm.paused){
+bgm.volume = 0.3;
 bgm.play();
-}else{
-bgm.pause();
-}
 
 }
 
 loadTrivia();
-
 </script>
 
 </body>
