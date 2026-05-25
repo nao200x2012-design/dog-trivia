@@ -94,6 +94,10 @@ margin-top:40px;
 🔊 ワン
 </button>
 
+<audio id="dogAudio" preload="auto">
+<source src="https://assets.mixkit.co/active_storage/sfx/85/85-preview.mp3" type="audio/mpeg">
+</audio>
+
 <audio id="bgm" loop preload="auto">
 <source src="bgm.mp3" type="audio/mpeg">
 </audio>
@@ -151,53 +155,13 @@ document.getElementById("loading").style.display="none";
 
 }
 
-function barkSound(){
-
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-let osc = audioCtx.createOscillator();
-let gain = audioCtx.createGain();
-
-osc.type = "square";
-osc.frequency.setValueAtTime(180, audioCtx.currentTime);
-osc.frequency.exponentialRampToValueAtTime(90, audioCtx.currentTime + 0.12);
-
-gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-
-osc.connect(gain);
-gain.connect(audioCtx.destination);
-
-osc.start();
-osc.stop(audioCtx.currentTime + 0.15);
-
-setTimeout(function(){
-
-let osc2 = audioCtx.createOscillator();
-let gain2 = audioCtx.createGain();
-
-osc2.type = "square";
-osc2.frequency.setValueAtTime(160, audioCtx.currentTime);
-osc2.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.12);
-
-gain2.gain.setValueAtTime(0.22, audioCtx.currentTime);
-gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-
-osc2.connect(gain2);
-gain2.connect(audioCtx.destination);
-
-osc2.start();
-osc2.stop(audioCtx.currentTime + 0.15);
-
-},180);
-
-}
-
 function playDogSound(){
 
+let dog = document.getElementById("dogAudio");
 let bgm = document.getElementById("bgm");
 
-barkSound();
+dog.currentTime = 0;
+dog.play();
 
 bgm.volume = 0.05;
 
